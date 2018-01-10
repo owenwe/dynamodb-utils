@@ -206,4 +206,3 @@ A function that will call batchWrite() on a section of the provided data, until 
 
 ### waitForTable
 A function that will kick off another function only after a DynamoDB table has the "ACTIVE" status.
-
