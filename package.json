@@ -1,0 +1,22 @@
+{
+  "name": "dynamodb-utils",
+  "version": "1.0.0",
+  "description": "Javascript utility functions mainly for Dynamodb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/owenwe/dynamodb-utils.git"
+  },
+  "keywords": [
+    "DynamoDB"
+  ],
+  "author": "Wes Owen <wesowen@protonmail.com> (https://github.com/owenwe/dynamodb-utils)",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/owenwe/dynamodb-utils/issues"
+  },
+  "homepage": "https://github.com/owenwe/dynamodb-utils#readme"
+}
