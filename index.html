@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DynamoDB Javascript Utilities</title>
+</head>
+<body>
+    <h1>DynamoDB Javascript Utilities</h1>
+    <p>Small group of functions for interacting with the DynamoDB Javascript API.</p>
+    exports.createError = createError
+    exports.createResponse = createResponse
+    exports.apiCallHandler = apiCallHandler
+    exports.addObjectProperty = addObjectProperty
+    exports.byteCount = byteCount
+    exports.kilobyteCount = kilobyteCount
+    exports.itemSizeCount = itemSizeCount
+    exports.arraySizeCount = arraySizeCount
+    exports.base64Encode = base64Encode
+    exports.base64Decode = base64Decode
+    exports.createSet = createSet
+    exports.createAttribute = createAttribute
+    exports.object2Map = object2Map
+    exports.objectOrNull = objectOrNull
+    exports.attributeOrNull = attributeOrNull
+    exports.getPropertyPaths = getPropertyPaths
+    exports.toStringPath = toStringPath
+    exports.toArrayPath = toArrayPath
+    exports.hasPropertyAtPath = hasPropertyAtPath
+    exports.hasAttributeAtPath = hasAttributeAtPath
+    exports.getAttributeAtPath = getAttributeAtPath
+    exports.insertMultiObject = insertMultiObject
+    exports.waitForTable = waitForTable
+    <ul>
+        <li><a href="#createError">createError</a></li>
+        <li><a href="#createResponse">createResponse</a></li>
+        <li><a href="#apiCallHandler">apiCallHandler</a></li>
+        <li><a href="#addObjectProperty">addObjectProperty</a></li>
+        <li><a href="#byteCount">byteCount</a></li>
+        <li><a href="#kilobyteCount">kilobyteCount</a></li>
+        <li><a href="#toKilobyte">toKilobyte</a></li>
+        <li><a href="#getObjectSize">getObjectSize</a></li>
+        <li><a href="#itemSizeCount">itemSizeCount</a></li>
+        <li><a href="#objectSizeCount">objectSizeCount</a></li>
+        <li><a href="#arraySizeCount">arraySizeCount</a></li>
+        <li><a href="#stringSizeCount">stringSizeCount</a></li>
+        <li><a href="#numberSizeCount">numberSizeCount</a></li>
+        <li><a href="#binarySizeCOunt">binarySizeCOunt</a></li>
+        <li><a href="#nullBoolSizeCount">nullBoolSizeCount</a></li>
+        <li><a href="#base64Encode">base64Encode</a></li>
+        <li><a href="#base64Decode">base64Decode</a></li>
+        <li><a href="#createSet">createSet</a></li>
+        <li><a href="#createAttribute">createAttribute</a></li>
+        <li><a href="#object2Map">object2Map</a></li>
+        <li><a href="#objectOrNull">objectOrNull</a></li>
+        <li><a href="#attributeOrNull">attributeOrNull</a></li>
+        <li><a href="#isObject">isObject</a></li>
+        <li><a href="#isArray">isArray</a></li>
+        <li><a href="#getPropertyPaths">getPropertyPaths</a></li>
+        <li><a href="#toStringPath">toStringPath</a></li>
+        <li><a href="#toArrayPath">toArrayPath</a></li>
+        <li><a href="#hasPropertyAtPath">hasPropertyAtPath</a></li>
+        <li><a href="#hasAttributeAtPath">hasAttributeAtPath</a></li>
+        <li><a href="#getAttributeAtPath">getAttributeAtPath</a></li>
+        <li><a href="#insertMultiObject">insertMultiObject</a></li>
+        <li><a href="#waitForTable">waitForTable</a></li>
+    </ul>
+
+    <h2 id="createError">createError</h2>
+    <p>
+        Constructs and returns a custom error object with an additional "type" property
+    </p>
+
+    <h2 id="createResponse">createResponse</h2>
+    <p>
+        Creates a response object good for AWS Lambda return values from a proxy API gateway
+    </p>
+
+    <h2 id="apiCallHandler">apiCallHandler</h2>
+    <p>
+        Constructs and returns a function using the provided callback.
+    </p>
+
+    <h2 id="addObjectProperty">addObjectProperty</h2>
+    <p>
+        Adds a new property with the name of the passed key parameter and a value of the passed value parameter.
+    </p>
+
+    <h2 id="byteCount">byteCount</h2>
+    <p>
+        Returns the size in bytes of the string
+    </p>
+
+    <h2 id="kilobyteCount">kilobyteCount</h2>
+    <p>
+        Returns the size of the string in kilobytes
+    </p>
+
+    <h2 id="toKilobyte">toKilobyte</h2>
+    <p>
+        Converts a value in bytes to Kilobytes
+    </p>
+
+    <h2 id="getObjectSize">getObjectSize</h2>
+    <p>
+        Returns the size of a generic object.
+    </p>
+
+    <h2 id="itemSizeCount">itemSizeCount</h2>
+    <p>
+        Calculates the size (in KB) of the passed item and returns the size as AWS would determine it
+        For example, if BatchWriteItem writes a 500 byte item and a 3.5 KB item, DynamoDB will calculate the size
+        as 5 KB (1 KB + 4 KB), not 4 KB (500 bytes + 3.5 KB)
+    </p>
+
+    <h2 id="objectSizeCount">objectSizeCount</h2>
+    <p>
+        Sums up the size of the passed object and returns the total
+    </p>
+
+    <h2 id="arraySizeCount">arraySizeCount</h2>
+    <p>
+        Sums up the size of the passed array and returns the total
+    </p>
+
+    <h2 id="stringSizeCount">stringSizeCount</h2>
+    <p>
+        Returns the size of a string item (for AWS capactity unit consumption)
+    </p>
+
+    <h2 id="numberSizeCount">numberSizeCount</h2>
+    <p>
+        Returns the size of a number item (for AWS capactity unit consumption)
+    </p>
+
+    <h2 id="binarySizeCOunt">binarySizeCOunt</h2>
+    <p>
+        Returns the size of a binary/byte array item (for AWS capactity unit consumption)
+    </p>
+
+    <h2 id="nullBoolSizeCount">nullBoolSizeCount</h2>
+    <p>
+        Returns the size of a boolean or null item (for AWS capactity unit consumption)
+    </p>
+
+    <h2 id="base64Encode">base64Encode</h2>
+    <p>
+        Encodes a string into a base 64 byte array value
+    </p>
+
+    <h2 id="base64Decode">base64Decode</h2>
+    <p>
+        Decodes a base 64 encoded byte array back to a string
+    </p>
+
+    <h2 id="createSet">createSet</h2>
+    <p>
+        Constructs and returns an AWS DynamoDB Set that can be used for API calls.
+    </p>
+
+    <h2 id="createAttribute">createAttribute</h2>
+    <p>
+        Constructs and returns an AWS DynamoDB attribute object that can be used for API calls.
+    </p>
+
+    <h2 id="object2Map">object2Map</h2>
+    <p>
+        Constructs and returns an AWS DynamoDB map object that can be used for API calls.
+    </p>
+
+    <h2 id="objectOrNull">objectOrNull</h2>
+    <p>
+        Returns either the object passed if it's something or null
+    </p>
+
+    <h2 id="attributeOrNull">attributeOrNull</h2>
+    <p>
+        Returns either the object passed if it's not null, or an attribute equaling the NULL item attribute value
+    </p>
+
+    <h2 id="isObject">isObject</h2>
+    <p>
+        Returns a boolean value that is true if the parameter passed is a property-based object
+    </p>
+
+    <h2 id="isArray">isArray</h2>
+    <p>
+        Returns a boolean value that is true if the parameter passed is an array object
+    </p>
+
+    <h2 id="getPropertyPaths">getPropertyPaths</h2>
+    <p>
+        Returns an object with property names that match the top-level property names of the passed object, but where
+        each value is an array of sub-level property names.<br />
+        Example<br />
+<pre>given:
+{
+    property1: 'value1',
+    property2: [1,2,3],
+    property3: {
+        property3_1: 'v3.1',
+        property3_2: {
+            property3_2_1: {
+                pickle: 'rick',
+                morty: {
+                    versions: [
+                        {universe: '31c-12', hasVirginity: true},
+                        {universe: '31c-13', hasVirginity: true},
+                        {universe: '31c-14', hasVirginity: true},
+                        {universe: '31d-10', hasVirginity: true},
+                        {universe: '31d-43', hasVirginity: true},
+                        {universe: '38q-27', hasVirginity: false},
+                        {universe: '47z-02', hasVirginity: true}
+                    ]
+                }
+            }
+        },
+        property3_3: 101
+    },
+    property4: {
+        property4_1: 'baz'
+    }
+}
+
+returns:
+{
+    property1: [],
+    property2: [
+        {'0': []},
+        {'1': []},
+        {'2': []}
+    ],
+    property3: [
+        {'property3_1': []},
+        {
+            'property3_2': [
+                {
+                    'property3_2_1': [
+                        {'pickle': []},
+                        {
+                            'morty': [
+                                {
+                                    versions: [
+                                        {
+                                            universe: [],
+                                            hasVirginity: []
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {'property3_3': []}
+    ],
+    property4: [
+        {'property4_1': []}
+    ]
+}
+</pre>
+    </p>
+
+    <h2 id="toStringPath">toStringPath</h2>
+    <p>
+        Uses the passed property paths object and the array of strings to return a delimited string of valid
+        child-descending property names.
+    </p>
+
+    <h2 id="toArrayPath">toArrayPath</h2>
+    <p>
+        Uses the passed property paths object and delimited string of property names to return a valid array of
+        child-descenting property names.
+    </p>
+
+    <h2 id="hasPropertyAtPath">hasPropertyAtPath</h2>
+    <p>
+        Checks if the passed object has a property at the given path
+    </p>
+
+    <h2 id="hasAttributeAtPath">hasAttributeAtPath</h2>
+    <p>
+        Checks if the passed item has an attribute at the given path
+    </p>
+
+    <h2 id="getAttributeAtPath">getAttributeAtPath</h2>
+    <p>
+        Returns the attribute in the passed AWS item at the given path.
+    </p>
+
+    <h2 id="insertMultiObject">insertMultiObject</h2>
+    <p>
+        A function that will call batchWrite() on a section of the provided data, until all the data has been written.
+    </p>
+
+    <h2 id="waitForTable">waitForTable</h2>
+    <p>
+        A function that will kick off another function only after a DynamoDB table has the "ACTIVE" status.
+    </p>
+</body>
+</html>
