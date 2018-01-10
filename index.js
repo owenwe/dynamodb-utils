@@ -234,9 +234,9 @@ const nullBoolSizeCount = (name, nb) => {
  */
 const base64Encode = (s) => {
   return typeof s === 'string'
-    ? btoa(encodeURIComponent(s).replace(/%([0-9A-F]{2})/g, (match, p1) => {
+    ? Buffer.from(encodeURIComponent(s).replace(/%([0-9A-F]{2})/g, (match, p1) => {
       return String.fromCharCode(Number.parseInt(`0x${p1}`))
-    }))
+    })).toString('base64')
     : undefined
 }
 
@@ -247,7 +247,10 @@ const base64Encode = (s) => {
  */
 const base64Decode = (s) => {
   return typeof s === 'string'
-    ? decodeURIComponent(atob(s).split('').map((c) => '%' + `00${c.charCodeAt(0).toString(16)}`.slice(-2)).join(''))
+    ? decodeURIComponent(Buffer.from(s, 'base64')
+      .toString()
+      .split('')
+      .map((c) => '%' + `00${c.charCodeAt(0).toString(16)}`.slice(-2)).join(''))
     : undefined
 }
 
