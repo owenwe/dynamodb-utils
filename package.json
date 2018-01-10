@@ -13,10 +13,10 @@
   "keywords": [
     "DynamoDB"
   ],
-  "author": "Wes Owen <wesowen@protonmail.com> (https://github.com/owenwe/dynamodb-utils)",
+  "author": "Wes Owen <wesowen@protonmail.com> (https://owenwe.github.io/dynamodb-utils)",
   "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/owenwe/dynamodb-utils/issues"
   },
-  "homepage": "https://github.com/owenwe/dynamodb-utils#readme"
+  "homepage": "https://owenwe.github.io/dynamodb-utils/"
 }
